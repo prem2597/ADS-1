@@ -30,7 +30,8 @@ class Team implements Comparable<Team> {
 	}
 	public String toString(){
 		//retrun all the attributes as a string but appending with ", "
-		String 
-        return "";
+		String teamDetails = new String();
+		 
+        return this.teanName + "," + this.noOfWins + "," + this.noOfLosses + "," + this.noOfDraws;
     }
 }
