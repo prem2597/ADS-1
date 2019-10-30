@@ -16,15 +16,10 @@ class Sum3 {
         }
         return -1;
     }
-    public static void main(final String[] args) {
-        int count = 0;
-        int[] arr = {30, -40, -20, -10, 40, 0, 10, 5};
+    public static int counts(final int[] arr) {
         int key;
         int c;
-        Arrays.sort(arr);
-        // String[] s = Arrays.toString(arr);
-        System.out.printf("Modified array : %s \n", Arrays.toString(arr));
-        // System.out.println(s);
+        int count = 0;
         for (int i = 0; i < arr.length - 1; i++) {
             for (int j = i + 1; j < arr.length; j++) {
                 if ((arr[i] + arr[j]) > 0) {
@@ -50,6 +45,19 @@ class Sum3 {
                 }
             }
         }
-        System.out.println(count);
+        return count;
+    }
+    public static void main(final String[] args) {
+        // int count = 0;
+        int[] arr = {30, -40, -20, -10, 40, 0, 10, 5};
+        // int key;
+        // int c;
+        int count1;
+        Arrays.sort(arr);
+        // String[] s = Arrays.toString(arr);
+        System.out.printf("Modified array : %s \n", Arrays.toString(arr));
+        // System.out.println(s);
+        count1 = counts(arr);
+        System.out.println(count1);
     }
 }
