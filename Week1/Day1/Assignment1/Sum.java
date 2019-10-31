@@ -1,5 +1,5 @@
 import java.util.Arrays;
-class Sum3 {
+class Sum {
     public static int binarySearch(final int[] arr, final int key) {
         int low = 0;
         int high = arr.length - 1;
