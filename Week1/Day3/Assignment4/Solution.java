@@ -1,16 +1,21 @@
-class Solution{
-	public Team[] sort(Team[] teams){
+/**
+ * @author Prem
+ */
+class Solution {
+	public Team[] sort(Team[] teams) {
 		// your code goes here
 		int n = teams.length;
-		for(int i = 0; i < n - 1; i++) {
+		for (int i = 0; i < n; i++) {
 			// int temp = i;
+			int min = i;
 			for (int j = i + 1; j < n; j++) {
-				if(teams[i].getname().compareTo(teams[j].getName()) > 1) {
-					Team teamName = teams[i];
-					teams[i] = teams[j];
-					teams[j] = teamName;
+				if (teams[j].compareTo(teams[min]) < 0) {
+					min = j;
 				}
 			}
+			Team teamName = teams[i];
+			teams[i] = teams[min];
+			teams[min] = teamName;
 		}
 		// return null;
 		// return arr;
@@ -18,20 +23,29 @@ class Solution{
 	}
 }
 class Team implements Comparable<Team> {
-	String teamName;
-	int noOfWins;
-	int noOfLosses;
-	int noOfDraws;
+	private String teamName;
+	private int noOfWins;
+	private int noOfLosses;
+	private int noOfDraws;
 	Team(String name, int wins, int losses, int draws){
 		teamName = name;
 		noOfDraws = draws;
 		noOfWins = wins;
 		noOfLosses = losses;
 	}
-	public String toString(){
+	public int compareTo(Team that) {
+        int var = that.noOfWins - this.noOfWins;
+        if (var == 0) {
+            var = this.noOfLosses - that.noOfLosses;
+            if (var == 0) {
+                var = that.noOfDraws - this.noOfDraws;
+            }
+        }
+        return var;
+	}
+	public String toString() {
 		//retrun all the attributes as a string but appending with ", "
 		String teamDetails = new String();
-		 
-        return this.teanName + "," + this.noOfWins + "," + this.noOfLosses + "," + this.noOfDraws;
+        return this.teamName + "," + this.noOfWins + "," + this.noOfLosses + "," + this.noOfDraws;
     }
 }

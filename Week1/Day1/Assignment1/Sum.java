@@ -1,3 +1,7 @@
+/**
+ *
+ * @author Prem
+ */
 import java.util.Arrays;
 class Sum {
     public static int binarySearch(final int[] arr, final int key) {
@@ -22,19 +26,20 @@ class Sum {
         int count = 0;
         for (int i = 0; i < arr.length - 1; i++) {
             for (int j = i + 1; j < arr.length; j++) {
-                if ((arr[i] + arr[j]) > 0) {
-                    // System.out.println("First check");
-                    key = (~((arr[i] + arr[j]) - 1));
-                    // System.out.println(key);
-                } else if ((arr[i] + arr[j]) < 0) {
-                    // System.out.println("Second check");
-                    key = Math.abs((arr[i] + arr[j]));
-                    // System.out.println(key);
-                } else {
-                    // System.out.println("third check");
-                    key = 0;
-                    // System.out.println(key);
-                }
+                // if ((arr[i] + arr[j]) > 0) {
+                //     // System.out.println("First check");
+                //     key = (~((arr[i] + arr[j]) - 1));
+                //     // System.out.println(key);
+                // } else if ((arr[i] + arr[j]) < 0) {
+                //     // System.out.println("Second check");
+                //     key = Math.abs((arr[i] + arr[j]));
+                //     // System.out.println(key);
+                // } else {
+                //     // System.out.println("third check");
+                //     key = 0;
+                //     // System.out.println(key);
+                // }
+                key = (~((arr[i] + arr[j]) - 1));
                 c = binarySearch(arr, key);
                 if (c == key) {
                     if (arr[i] < arr[j]
