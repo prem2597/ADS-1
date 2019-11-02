@@ -1,7 +1,8 @@
 /**
  * @author Prem
  */
-class Solution {
+import java.util.*;
+ class Solution {
 	private static int partition(final int[] arr,
 	final int low, final int high) {
 		int pivot = arr[high];
@@ -21,6 +22,21 @@ class Solution {
 		// arr[high] = temp2;
 
 		return i + 1;
+	}
+	public static void shuffle(int[] arr) {
+		Random rand = new Random();
+		int n = arr.length;
+		for(int i = 0; i < n; i++) {
+			int r = i + rand.nextInt(n - i);
+			swap(arr,r,i);
+			// System.out.println(arr);
+		}
+		// System.out.println(arr);
+		// for (int i = 0; i < n; i++) {
+		// 	System.out.print(arr[i] + " ");
+		// }
+		// System.out.println("--------------");
+
 	}
 	public static void swap(final int[] arr, final int i, final int j) {
 		int temp;
@@ -42,6 +58,7 @@ class Solution {
 		int low = 0;
 		int high = arr.length  - 1;
 		int[] c;
+		shuffle(arr);
 		c = quickSort(arr, low, high);
 		return c;
 	}
