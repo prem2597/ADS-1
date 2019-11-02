@@ -12,6 +12,13 @@ class Student implements Comparable<Student>{
 	boolean flag;
 	Student(String name, String dob, int sub1, int sub2, int sub3, int marks, String category){
 		//your code goes here.
+		this.name = name;
+		this.dob = dob;
+		this.sub1 = sub1;
+		this.sub2 = sub2;
+		this.sub3 = sub3;
+		this.marks = marks;
+		this.category = category;
 	}
 	public int compareTo(Student stu) {
      	//your code goes here.
