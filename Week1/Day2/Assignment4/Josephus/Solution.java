@@ -8,9 +8,9 @@ class Queue {
 	public int getSize() {
 		return size;
 	}
-	Queue(final int capacity) {
-		arr = new int[capacity];
-		size = capacity;
+	Queue(final int range) {
+		arr = new int[range];
+		size = range;
 		for (int i = 0; i < arr.length; i++) {
 			arr[i] = i;
 		}
@@ -20,12 +20,12 @@ class Queue {
 	}
 	public int dequeue() {
 		if (!isempty()) {
-			int removedItem = arr[0];
+			int remove = arr[0];
 			for (int i = 0; i < arr.length - 1; i++) {
 				arr[i] = arr[i + 1];
 			}
 			arr[--size] = 0;
-			return removedItem;
+			return remove;
 		}
 		return 0;
 	}

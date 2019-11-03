@@ -1,3 +1,6 @@
+/**
+ * @author PREM
+ */
 import java.util.Arrays;
 class Sortedorder {
     public static int[] mergeArrays(final int[] arr1,final int[] arr2) {

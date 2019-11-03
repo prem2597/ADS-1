@@ -1,9 +1,15 @@
+import java.util.Arrays;
 /**
  *
  * @author Prem
  */
-import java.util.Arrays;
-class Sum {
+public class Sum {
+    /**
+     * binary search to search the element.
+     * @param arr array 
+     * @param key search element
+     * @return if value is there or not.
+     */
     public static int binarySearch(final int[] arr, final int key) {
         int low = 0;
         int high = arr.length - 1;
