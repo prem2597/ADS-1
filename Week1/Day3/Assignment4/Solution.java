@@ -5,20 +5,17 @@ class Solution {
 	public Team[] sort(Team[] teams) {
 		// your code goes here
 		int n = teams.length;
-		for (int i = 0; i < n; i++) {
-			// int temp = i;
-			int min = i;
-			for (int j = i + 1; j < n; j++) {
-				if (teams[j].compareTo(teams[min]) < 0) {
-					min = j;
+		for (int i = 1; i < n; i++) {
+			for (int j = i; j > 0; j--) {
+				if (teams[j - 1].compareTo(teams[j]) == -1) {
+					Team temp = teams[j - 1];
+					teams[j - 1] = teams[j];
+					teams[j] = temp;
+				} else {
+					break;
 				}
 			}
-			Team teamName = teams[i];
-			teams[i] = teams[min];
-			teams[min] = teamName;
 		}
-		// return null;
-		// return arr;
 		return teams;
 	}
 }
@@ -34,14 +31,30 @@ class Team implements Comparable<Team> {
 		noOfLosses = losses;
 	}
 	public int compareTo(Team that) {
-        int var = that.noOfWins - this.noOfWins;
-        if (var == 0) {
-            var = this.noOfLosses - that.noOfLosses;
-            if (var == 0) {
-                var = that.noOfDraws - this.noOfDraws;
-            }
-        }
-        return var;
+        if (this.noOfWins > that.noOfWins) {
+			return 1;
+		}
+		if (this.noOfWins < that.noOfWins) {
+			return -1;
+		}
+		if (this.noOfLosses < that.noOfLosses) {
+			return 1;
+		}
+		if (this.noOfLosses > that.noOfLosses) {
+			return -1;
+		}
+		if (this.noOfDraws > that.noOfDraws) {
+			return 1;
+		}
+		if (this.noOfDraws < that.noOfDraws) {
+			return -1;
+		}
+
+		if (teamName.compareTo(that.teamName) < 0) {
+			return 1;
+		}
+		return 0;
+
 	}
 	public String toString() {
 		//retrun all the attributes as a string but appending with ", "

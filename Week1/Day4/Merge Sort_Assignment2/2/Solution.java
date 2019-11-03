@@ -3,37 +3,43 @@
  */
 class Solution {
 	public static String[] mergeSort(final String[] arr) {
-		if (arr.length >= 2) {
-			String[] left = new String[arr.length / 2];
-			String[] right = new String[arr.length
-			- arr.length / 2];
-
-			for (int i = 0; i < left.length; i++) {
-				left[i] = arr[i];
-			}
-
-			for (int i = 0; i < right.length; i++) {
-				right[i] = arr[i + arr.length / 2];
-			}
-			mergeSort(left);
-			mergeSort(right);
-			merge(arr, left, right);
-		}
+		sort(arr);
 		return arr;
 	}
 
-	public static void merge(final String[] arr,
-	final String[] left, final String[] right) {
-		int a = 0;
-		int b = 0;
+	public static void sort(final String[] arr) {
+		String[] aux = new String[arr.length];
+		sort(arr, aux, 0, arr.length - 1);
+	}
+
+	private static void sort(final String[] arr,
+	final String[] aux, final int low, final int high) {
+		if (high <= low) {
+			return;
+		}
+		int mid = (low + high) / 2;
+		sort(arr, aux, low, mid);
+		sort(arr, aux, mid + 1, high);
+		merge(arr, aux, low, mid, high);
+	}
+
+	public static void merge(final String[] arr, final String[] aux,
+	final int low, final int mid, final int high) {
 		for (int i = 0; i < arr.length; i++) {
-			if (b >= right.length || (a < left.length
-			&& left[a].compareToIgnoreCase(right[b]) < 0)) {
-				arr[i] = left[a];
-				a++;
+			aux[i] = arr[i];
+		}
+
+		int i = low;
+		int j = mid + 1;
+		for (int k = low; k <= high; k++) {
+			if (i > mid) {
+				arr[k] = aux[j++];
+			} else if (j > high) {
+				arr[k] = aux[i++];
+			} else if (aux[i].compareTo(aux[j]) > 0) {
+				arr[k] = aux[j++];
 			} else {
-				arr[i] = right[b];
-				b++;
+				arr[k] = aux[i++];
 			}
 		}
 	}

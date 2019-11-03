@@ -1,62 +1,63 @@
 import java.util.*;
-class Node {
-    int value;
-    Node next;
-    Node prev;
-    Node (int val) {
-        this.value = val;
-    }
+class Queue {
+	private static int[] arr;
+	private static int size;
+	public int[] getArr() {
+		return arr;
+	}
+	public int getSize() {
+		return size;
+	}
+	Queue(final int capacity) {
+		arr = new int[capacity];
+		size = capacity;
+		for (int i = 0; i < arr.length; i++) {
+			arr[i] = i;
+		}
+	}
+	public void enqueue(final int item) {
+		arr[size++] = item;
+	}
+	public int dequeue() {
+		if (!isempty()) {
+			int removedItem = arr[0];
+			for (int i = 0; i < arr.length - 1; i++) {
+				arr[i] = arr[i + 1];
+			}
+			arr[--size] = 0;
+			return removedItem;
+		}
+		return 0;
+	}
+	public boolean isempty() {
+		return size == 0;
+	}
+
 }
-class Linkedlist {
-    Node head;
-    Node tail;
-
-    public void add(int val) {
-        Node node = new Node(val);
-        if (this.head == null){
-            this.head = node;
-            this.tail = node;
-        }else {
-            this.tail.next = node;
-            node.prev = this.tail;
-            this.tail = node;
-        }
-    }
-
-    public void formCircle() {
-        this.tail.next = this.head;
-        this.head.prev = this.tail;
-    }
-}
-
-class Solution{
+class Solution {
 	public static String Josephus(int a, int b){
 		// fill you code Here
-		Linkedlist data = new Linkedlist();
-		for (int i = 0; i < a; i++) {
-			Node node = new Node(i);
-			data.add(i);
-		}
-		data.formCircle();
-		int position = 1;
-		Node x = data.head;
-		int del = 0;
-		String toReturn =" ";
-		while(del != a) {
-			x = x.next;
-			position++;
-			if(position == b) {
-				position = 1;
-				toReturn += x.value + " ";
-				Node prevNode = x.prev;
-				Node nextNode = x.next;
-				prevNode.next = nextNode;
-				nextNode.prev = prevNode;
-				del++;
-				x = x.next;
+		String x = "";
+		Queue queue = new Queue(a);
+		int count = 0;
+		int result;
+
+		while (count < a - 1) {
+			if (b > queue.getSize()) {
+				result = b % queue.getSize();
+				if (result == 0) {
+					result = queue.getSize();
+				}
+			} else {
+				result = b;
 			}
+			while (result > 1) {
+				queue.enqueue(queue.dequeue());
+				result--;
+			}
+			x += queue.dequeue() + " ";
+			count++;
 		}
-		toReturn = toReturn.trim();
-		return toReturn;
+		return x + queue.getArr()[0];
 	}
 }
