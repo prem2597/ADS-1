@@ -1,8 +1,13 @@
 /**
- * @author Prem
+ * @author PREM
  */
 class Solution {
-	public Team[] sort(Team[] teams) {
+	/**
+	 * sort method to sort the teams.
+	 * @param teams team with number of wins,loss.draw.
+	 * @return team
+	 */
+	public Team[] sort(final Team[] teams) {
 		// your code goes here
 		int n = teams.length;
 		for (int i = 1; i < n; i++) {
@@ -20,17 +25,30 @@ class Solution {
 	}
 }
 class Team implements Comparable<Team> {
+	/**
+	 * teamName.
+	 */
 	private String teamName;
+	/**
+	 * Number of wins.
+	 */
 	private int noOfWins;
+	/**
+	 * Number of losses.
+	 */
 	private int noOfLosses;
+	/**
+	 * Number of draws.
+	 */
 	private int noOfDraws;
-	Team(String name, int wins, int losses, int draws){
+	Team(final String name, final int wins,
+	final int losses, final int draws) {
 		teamName = name;
 		noOfDraws = draws;
 		noOfWins = wins;
 		noOfLosses = losses;
 	}
-	public int compareTo(Team that) {
+	public int compareTo(final Team that) {
         if (this.noOfWins > that.noOfWins) {
 			return 1;
 		}
@@ -59,6 +77,7 @@ class Team implements Comparable<Team> {
 	public String toString() {
 		//retrun all the attributes as a string but appending with ", "
 		String teamDetails = new String();
-        return this.teamName + "," + this.noOfWins + "," + this.noOfLosses + "," + this.noOfDraws;
+		return this.teamName + "," + this.noOfWins
+		+ "," + this.noOfLosses + "," + this.noOfDraws;
     }
 }

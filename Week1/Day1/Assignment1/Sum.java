@@ -1,12 +1,16 @@
 import java.util.Arrays;
 /**
  *
- * @author Prem
+ * @author PREM
  */
-public class Sum {
+public final class Sum {
+
+    private Sum() {
+
+    }
     /**
      * binary search to search the element.
-     * @param arr array 
+     * @param arr array
      * @param key search element
      * @return if value is there or not.
      */
@@ -26,6 +30,11 @@ public class Sum {
         }
         return -1;
     }
+    /**
+     * counts the number of pairs.
+     * @param arr array
+     * @return count
+     */
     public static int counts(final int[] arr) {
         int key;
         int c;
@@ -58,6 +67,10 @@ public class Sum {
         }
         return count;
     }
+    /**
+     * Main method.
+     * @param args arguments
+     */
     public static void main(final String[] args) {
         // int count = 0;
         int[] arr = {30, -40, -20, -10, 40, 0, 10, 5};

@@ -1,6 +1,15 @@
 import java.util.*;
+/**
+ * @author PREM
+ */
 class Queue {
+	/**
+	 * intialize the array.
+	 */
 	private static int[] arr;
+	/**
+	 * intialize its size.
+	 */
 	private static int size;
 	public int[] getArr() {
 		return arr;
@@ -34,8 +43,19 @@ class Queue {
 	}
 
 }
-class Solution {
-	public static String Josephus(int a, int b){
+public final class Solution {
+
+	private Solution() {
+
+	}
+
+	/**
+	 * Game implementation.
+	 * @param a to input those number of values.
+	 * @param b to eliminate the value at that postion.
+	 * @return string.
+	 */
+	public static String Josephus(final int a, final int b) {
 		// fill you code Here
 		String x = "";
 		Queue queue = new Queue(a);

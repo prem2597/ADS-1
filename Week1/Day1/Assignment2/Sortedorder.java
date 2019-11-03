@@ -1,9 +1,19 @@
+import java.util.Arrays;
 /**
  * @author PREM
  */
-import java.util.Arrays;
-class Sortedorder {
-    public static int[] mergeArrays(final int[] arr1,final int[] arr2) {
+public final class Sortedorder {
+
+    private Sortedorder() {
+
+    }
+    /**
+     * to merge the arrays.
+     * @param arr1 array1
+     * @param arr2 array2
+     * @return sorted array
+     */
+    public static int[] mergeArrays(final int[] arr1, final int[] arr2) {
         int[] x = new int[arr1.length + arr2.length];
         int i = 0;
         int j = 0;
@@ -20,6 +30,10 @@ class Sortedorder {
         }
         return x;
     }
+    /**
+     * Main method.
+     * @param args arguments
+     */
     public static void main(final String[] args) {
         int[] arr1 = new int[]{-50, -25, -4, -1, 0, 3, 7, 14, 27, 48, 70};
         int[] arr2 = new int[]{-40, -16, -12, -7, 0, 13, 17, 24, 37, 38, 90};
