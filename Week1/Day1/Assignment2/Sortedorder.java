@@ -20,8 +20,8 @@ public final class Sortedorder {
         for (int k = 0; k < x.length; k++) {
             if (i > arr1.length - 1) {
                 x[k] = arr2[j++];
-            } else if (j > x.length - 1) {
-                x[k] = arr2[i++];
+            } else if (j > arr2.length - 1) {
+                x[k] = arr1[i++];
             } else if (arr1[i] < arr2[j]) {
                 x[k] = arr1[i++];
             } else {

@@ -11,18 +11,19 @@ class Queue {
 	 * intialize its size.
 	 */
 	private static int size;
-	public int[] getArr() {
-		return arr;
-	}
-	public int getSize() {
-		return size;
-	}
+	
 	Queue(final int range) {
 		arr = new int[range];
 		size = range;
 		for (int i = 0; i < arr.length; i++) {
 			arr[i] = i;
 		}
+	}
+	public int[] getArr() {
+		return arr;
+	}
+	public int getSize() {
+		return size;
 	}
 	public void enqueue(final int item) {
 		arr[size++] = item;
@@ -45,7 +46,8 @@ class Queue {
 }
 public final class Solution {
 
-	private Solution() {
+	private Solution() {int count = 0;
+		int result;
 
 	}
 
@@ -57,11 +59,11 @@ public final class Solution {
 	 */
 	public static String Josephus(final int a, final int b) {
 		// fill you code Here
-		String x = "";
-		Queue queue = new Queue(a);
 		int count = 0;
 		int result;
-
+		Queue queue = new Queue(a);
+		String x;
+		x = "";
 		while (count < a - 1) {
 			if (b > queue.getSize()) {
 				result = b % queue.getSize();
@@ -75,7 +77,7 @@ public final class Solution {
 				queue.enqueue(queue.dequeue());
 				result--;
 			}
-			x += queue.dequeue() + " ";
+			x = x + queue.dequeue() + " ";
 			count++;
 		}
 		return x + queue.getArr()[0];
