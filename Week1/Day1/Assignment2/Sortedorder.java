@@ -35,8 +35,8 @@ public final class Sortedorder {
      * @param args arguments
      */
     public static void main(final String[] args) {
-        int[] arr1 = new int[]{-50, -25, -4, -1, 0, 3, 7, 14, 27, 48, 70};
-        int[] arr2 = new int[]{-40, -16, -12, -7, 0, 13, 17, 24, 37, 38, 90};
+        int[] arr1 = new int[]{-50, -17, -16, -5, -1, 0, 5, 8, 6, 57};
+        int[] arr2 = new int[]{-40, -25, -5, -2, 0, 8, 64, 85, 97, 100};
         // Arrays.sort(arr1);
         // Arrays.sort(arr2);
         // String[] s = Arrays.toString(arr);

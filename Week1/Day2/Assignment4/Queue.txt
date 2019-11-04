@@ -1,0 +1,118 @@
+// class QueueNode {
+//     int key;
+//     QueueNode next;
+
+//     public QueueNode (int key) {
+//         this.key = key;
+//         this.next = null;
+//     }
+// }
+
+// class Queue {
+//     QueueNode front, rear;
+
+//     public Queue() {
+//         this.front = this.rear = null;
+//     }
+
+//     void enqueue(int key) {
+//         QueueNode temp = new QueueNode(key);
+
+//         if(this.rear == null) {
+//             this.front = this.rear;
+//             this.rear = temp;
+//             return;
+//         }
+
+//         this.rear.next = temp;
+//         this.rear = temp;
+//     }
+
+//     QueueNode dequeue() {
+
+//         if(this.front == null) {
+//             return null;
+//         }
+//         QueueNode temp = this.front;
+//         this.front = this.front.next;
+
+//         if(this.front == null) {
+//             this.rear = null;
+//         }
+//         return temp;
+//     }
+// 
+
+String s = "";
+		int x;
+		// LinkedQueue<Integer> queue = new LinkedList<Integer>();
+		Queue queue = new Queue();
+		for (int i = 0; i < a; i++) {
+			queue.enqueue(i);
+		}
+		System.out.println(queue);
+		while (queue.size() > 1) {
+			for (int j = 0; j < b - 1; j++) {
+				x = queue.dequeue();
+				queue.enqueue(x);
+			}
+			s = s + queue.dequeue() + " ";
+		}
+		s = s + queue.dequeue();
+		return s;
+
+
+
+class QueueNode {
+    int key;
+    QueueNode next;
+
+    public QueueNode (int key) {
+        this.key = key;
+        this.next = null;
+    }
+}
+
+class Queue {
+    QueueNode front, rear;
+
+    public Queue() {
+		this.front = null;
+		this.rear = null;
+    }
+
+    void enqueue(int key) {
+        QueueNode temp = new QueueNode(key);
+
+        if(this.rear == null) {
+            this.front = this.rear;
+            this.rear = temp;
+            return;
+        }
+
+        this.rear.next = temp;
+        this.rear = temp;
+    }
+
+    QueueNode dequeue() {
+
+        if(this.front == null) {
+            return null;
+        }
+        QueueNode temp = this.front;
+        this.front = this.front.next;
+
+        if(this.front == null) {
+            this.rear = null;
+        }
+        return temp;
+	}
+	
+	public int size() {
+		int count = 0;
+		for (Integer item: queue) {
+			count = count + 1;
+		}
+		return count;
+	}
+}
