@@ -36,12 +36,12 @@ public final class Solution {
 				left.insert(arr[i]);
 			}
 
-			if (left.size() > right.size() + 1) {
+			if ((left.size() - right.size()) > 1) {
 				right.insert(left.min());
 				left.delMax();
 			}
 
-			if (right.size() > left.size() + 1) {
+			if ((right.size() - left.size()) > 1) {
 				left.insert(right.max());
 				right.delMax();
 			}
