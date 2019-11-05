@@ -1,6 +1,10 @@
 import java.util.*;
 /**
  * @author PREM
+ * Time Complexity:
+ * Insertion Logarithmic time.
+ * Deletion Logarithmic time.
+ * median constant time.
  */
 public final class Solution {
 	/**
