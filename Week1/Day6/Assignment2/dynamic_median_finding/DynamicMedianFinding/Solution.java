@@ -23,7 +23,7 @@ public final class Solution {
 
 		double median = 0;
 
-		 int n = arr.length;
+		int n = arr.length;
 
 		MaxPQ<Double> right = new MaxPQ(n);
 

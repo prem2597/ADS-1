@@ -1,0 +1,257 @@
+// import java.util.NoSuchElementException;
+import java.util.Arrays;
+/**
+ * BinarySearchST.
+ * @param <Key> is the key in the dictionary.
+ * @param <Value> is the value in the dictionary.
+ */
+public final class BinarySearchST<Key extends Comparable, Value> {
+
+    /**
+     * five is used to initialize the array as a sample.
+     */
+     private final int numberFive = 5;
+
+     /**
+     * storing keys in an array.
+     */
+    private Key[] myKeys;
+    /**
+     * storing values in another array.
+     */
+    private Value[] myValues;
+    /**
+     * size is used to know the number of elements in the array.
+     */
+    private int size;
+
+    /**
+     * default constructoe used to initialize the array with an initial size of
+     * 5 size.
+     */
+    BinarySearchST() {
+        myKeys = (Key[]) new Comparable[numberFive];
+        myValues = (Value[]) new Comparable[numberFive];
+        size = 0;
+    }
+
+    /**
+     * resize method is used to avoid the overflow of elements.
+     */
+    public void reSize() {
+        myKeys = Arrays.copyOf(myKeys, 2 * myKeys.length);
+        myValues = Arrays.copyOf(myValues, 2 * myValues.length);
+    }
+
+    /**
+     * get size helps us to know the number of elements in the array.
+     * @return the number of elements(size).
+     */
+    public int getSize() {
+        return size;
+    }
+
+
+    /**
+     * contains method will let us knoe if the key passed is in the keys array.
+     * @param a to find.
+     * @return true if exists otherwise false.
+     */
+    public boolean contains(final Key a) {
+        // if (a == null) {
+        //     throw new IllegalArgumentException("argument to get() is null");
+        // }
+        return get(a) != null;
+    }
+
+    /**
+     * get method helps us to get the value for a particu;ar key which helps
+     * us to search for a constant time complexity.
+     * @param a key to search.
+     * @return value if the keys exists in the array otherwise false.
+     */
+    public Value get(final Key a) {
+        // if (a == null) {
+        //     throw new IllegalArgumentException("argument to get() is null");
+        // }
+        if (isEmpty()) {
+            return null;
+        }
+
+        int i = rank(a);
+
+        if (i < size && myKeys[i].compareTo(a) == 0) {
+            return myValues[i];
+        }
+
+        return null;
+    }
+
+    /**
+     * put method helps us to keep the key and value in both arrays to
+     * point eachother.
+     * @param a key to put.
+     * @param b value to be pointed for key a.
+     */
+    public void put(final Key a, final Value b) {
+        // if (a == null) {
+        //     throw new IllegalArgumentException("key cannot be null");
+        // }
+
+        int i = rank(a);
+
+        if (b == null) {
+            delete(a);
+            return;
+        }
+
+        if (i < size && myKeys[i].compareTo(a) == 0) {
+            myValues[i] = b;
+            return;
+        }
+
+        if (size == myKeys.length) {
+            reSize();
+        }
+
+        for (int j = size; j > i; j--) {
+            myKeys[j] = myKeys[j - 1];
+            myValues[j] = myValues[j - 1];
+        }
+
+        myKeys[i] = a;
+        myValues[i] = b;
+        size++;
+        return;
+    }
+
+    /**
+     * rank method will helps us know hoe many elements are there which are
+     * less than the key passed.
+     * @param a the key to search.
+     * @return the position of the key if the key exists in the array therwise
+     * give the number of keys in the array which are less than key a.
+     */
+    public int rank(final Key a) {
+        int low = 0;
+        int high = size - 1;
+        int mid;
+        while (low <= high) {
+            mid = low + ((high - low) / 2);
+            if (myKeys[mid].compareTo(a) == 0) {
+                return mid;
+            } else if (myKeys[mid].compareTo(a) < 0) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+        return low;
+    }
+
+    /**
+     * delete method will help us delete the key and value pair from both the
+     * arrays if that exists in the array and then move those elements one
+     * index. before.
+     * @param a key to be deleted.
+     */
+    public void delete(final Key a) {
+        // if (a == null) {
+        //     throw new IllegalArgumentException("key cannot be null");
+        // }
+
+        if (isEmpty()) {
+            return;
+        }
+
+        int i = rank(a);
+
+        if (i == size || myKeys[i].compareTo(a) != 0) {
+            return;
+        }
+
+        for (int j = i; j < size - 1; j++) {
+            myKeys[j] = myKeys[j + 1];
+            myValues[j] = myValues[j + 1];
+        }
+        size--;
+        myKeys[size] = null;
+        myValues[size] = null;
+    }
+
+    /**
+     * max method will give us the max key.
+     * @return the key which is max in the given array.
+     */
+    public Key max() {
+        if (isEmpty()) {
+            return null;
+        }
+        return myKeys[size - 1];
+    }
+
+    /**
+     * min method will give us the min key.
+     * @return the key which is min in the given array.
+     */
+    public Key min() {
+        if (isEmpty()) {
+            return null;
+        }
+        return myKeys[0];
+    }
+
+    /**
+     * delete min method will help us delete the smallest key in the array and
+     * in return moves all the elements one index before.
+     */
+    public void deleteMin() {
+        // if (isEmpty()) {
+        //     throw new NoSuchElementException("Symbol table underflow error");
+        // }
+        delete(min());
+    }
+
+
+    /**
+     * is empty method will help us to verify if the array is empty.
+     * @return true if the array is empty otherwise false.
+     */
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    /**
+     * floor method will help us by showing the largest key in the array and
+     * smaller than the key passes.
+     * @param a is the key for which we have to find the floor.
+     * @return the index if the element exists in the array otherwise the
+     * element preceeding.
+     */
+    public Key floor(final Key a) {
+        if (a == null) {
+            throw new IllegalArgumentException("argument to floor() is null");
+        }
+        int i = rank(a);
+        if (i < size && a.compareTo(myKeys[i]) == 0) {
+            return myKeys[i];
+        }
+        if (i == 0) {
+            return null;
+        }
+        return myKeys[i - 1];
+    }
+
+    /**
+     * keys method will help us to get all the possible keys in the keys array.
+     * @return the keys in the format of string where each element is seperated
+     * with " ".
+     */
+    public String keys() {
+        String answer = "";
+        for (int i = 0; i < size; i++) {
+            answer += myKeys[i] + " ";
+        }
+        return answer;
+    }
+}
