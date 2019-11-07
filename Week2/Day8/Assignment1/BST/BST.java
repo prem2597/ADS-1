@@ -8,7 +8,7 @@ public class BST<Key extends Comparable<Key>, Value> {
         private Value val;
         private Node left;
         private Node right;
-        private int size;
+        int size;
 
         public Node (Key key, Value val, int size) {
             this.key = key;
@@ -20,9 +20,26 @@ public class BST<Key extends Comparable<Key>, Value> {
     public BST() {
 
     }
+    public boolean isEmpty() {
+        return size() == 0;
+    }
+    public int size() {
+        return size(root);
+    }
+    private int size(Node n) {
+        if (n == null) {
+            return 0;
+        } else {
+            return n.size;
+        }
+    }
 
     public Value get(Key key) {
         return get(root, key);
+    }
+
+    public boolean contains(Key k) {
+        return get(k) != null;
     }
 
     private Value get(Node x, Key key) {
@@ -217,58 +234,70 @@ public class BST<Key extends Comparable<Key>, Value> {
     }
 
     public Key select(int k) {
-        if (k < 0 || k >= size()) {
-            throw new IllegalArgumentException("argument to select() is invalid: " + k);
-        }
         Node x = select(root, k);
         return x.key;
     }
-
-    // Return key of rank k. 
     private Node select(Node x, int k) {
-        if (x == null) return null; 
+        if (x == null) {
+            return null;
+        }
         int t = size(x.left); 
-        if      (t > k) return select(x.left,  k); 
-        else if (t < k) return select(x.right, k-t-1); 
-        else            return x; 
+        if (t > k) {
+            return select(x.left,  k);
+        } else if (t < k) {
+            return select(x.right, k-t-1);
+        } else {
+            return x;
+        }
     } 
 
     public int rank(Key key) {
-        if (key == null) throw new IllegalArgumentException("argument to rank() is null");
         return rank(key, root);
     } 
 
-    // Number of keys in the subtree less than key.
     private int rank(Key key, Node x) {
-        if (x == null) return 0; 
-        int cmp = key.compareTo(x.key); 
-        if      (cmp < 0) return rank(key, x.left); 
-        else if (cmp > 0) return 1 + size(x.left) + rank(key, x.right); 
-        else              return size(x.left); 
+        if (x == null) {
+            return 0;
+        }
+        int cmp = key.compareTo(x.key);
+        if (cmp < 0) {
+            return rank(key, x.left);
+        } else if (cmp > 0) {
+            return 1 + size(x.left) + rank(key, x.right);
+        } else {
+            return size(x.left);
+        }
     }
 
     public Iterable<Key> keys() {
-        if (isEmpty()) return new Queue<Key>();
+        if (isEmpty()) {
+            return new Queue<Key>();
+        }
         return keys(min(), max());
     }
 
     public Iterable<Key> keys(Key lo, Key hi) {
-        if (lo == null) throw new IllegalArgumentException("first argument to keys() is null");
-        if (hi == null) throw new IllegalArgumentException("second argument to keys() is null");
-
         Queue<Key> queue = new Queue<Key>();
         keys(root, queue, lo, hi);
         return queue;
     } 
 
-    private void keys(Node x, Queue<Key> queue, Key lo, Key hi) { 
-        if (x == null) return; 
-        int cmplo = lo.compareTo(x.key); 
-        int cmphi = hi.compareTo(x.key); 
-        if (cmplo < 0) keys(x.left, queue, lo, hi); 
-        if (cmplo <= 0 && cmphi >= 0) queue.enqueue(x.key); 
-        if (cmphi > 0) keys(x.right, queue, lo, hi); 
-    } 
+    private void keys(Node x, Queue<Key> queue, Key lo, Key hi) {
+        if (x == null) {
+            return;
+        }
+        int cmplo = lo.compareTo(x.key);
+        int cmphi = hi.compareTo(x.key);
+        if (cmplo < 0) {
+            keys(x.left, queue, lo, hi);
+        }
+        if (cmplo <= 0 && cmphi >= 0) {
+            queue.enqueue(x.key);
+        }
+        if (cmphi > 0) {
+            keys(x.right, queue, lo, hi);
+        }
+    }
 
 
 }
