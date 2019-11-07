@@ -1,0 +1,162 @@
+// import jdk.internal.org.objectweb.asm.tree.analysis.Value;
+
+public class SequentialSearchST<Key extends Comparable<Key>,Value> {
+    private int n;
+    private Node first;
+
+
+    class Node<Key, Value> {
+        private Key key;
+        private Value val;
+        private Node next;
+    
+        public Node(Key key, Value val, Node next) {
+            this.key = key;
+            this.val = val;
+            this.next = next;
+        }
+    
+        public Key getKey() {
+            return this.key;
+        }
+        public void setKey(Key key) {
+            this.key = key;
+        }
+    
+    
+        public Value getVal() {
+            return this.val;
+        }
+        public void setVal(Value val) {
+            this.val = val;
+        }
+    
+    
+        public Node getNext() {
+            return this.next;
+        }
+        public void setNext(Node next) {
+            this.next = next;
+        }
+    }
+    
+    public SequentialSearchST() {
+
+    }
+
+    // Node<Key, Value> head;
+    Node<Key, Value> newkey;
+    Node<Key, Value> prevkey;
+    Node<Key, Value> tail;
+
+    public int size() {
+        return n;
+    }
+
+    public boolean isEmpty() {
+        return head == null;
+    }
+
+    public void organize() {
+        if (newkey != prevkey) {
+            prevkey.setNext(newkey.getNext());
+            newkey.setNext(null);
+            tail.setNext(newkey);
+            tail = newkey;
+        }
+    }
+
+    public boolean contains(Key key) {
+        // if (key == null)
+        // return get(key) != null;
+        Node<Key,Value> temp = head;
+        if (isEmpty()) {
+            return false;
+        }
+        while (temp.getNext() != null) {
+            if (key.compareTo(temp.getKey()) == 0) {
+                newkey = temp;
+                return true;
+            }
+            prevkey = temp;
+            temp = temp.getNext();
+        }
+        return false;
+        
+    }
+
+    public Value get(Key key) {
+        // for (Node x = first; x != null; x = x.next) {
+        //     if (key.equals(x.key)) {
+        //         return x.val;
+        //     }
+        //         // return x.val;
+        // }
+        // return null;
+        if (contains(key)) {
+            organize();
+            return newkey.getVal();
+        }
+        return null;
+    }
+
+    public void put(Key key, Value val) {
+        // if (val == null) {
+        //     delete(key);
+        //     return;
+        // }
+
+        // for (Node x = first; x != null; x = x.next) {
+        //     if (key.equals(x.key)) {
+        //         x.val = val;
+        //         return;
+        //     }
+        // }
+        // first = new Node(key, val, first);
+        // n++;
+        if (head == null) {
+            Node head = new Node(key, val);
+            tail = head;
+            return;
+        }
+        
+        if (contains(key)) {
+            key.setVal(val);
+            return;
+        }
+
+        Node<Key, Value> temp = new Node(key, val);
+        temp.setNext(head);
+        head = temp;
+    }
+
+    public void delete(Key key) {
+        first = delete(first, key);
+    }
+    
+    private Node delete(Node x, Key key) {
+        if (x == null) {
+            return null;
+        }
+        if (key.equals(x.key)) {
+            n--;
+            return x.next;
+        }
+        x.next = delete(x.getNext, key);
+        return x;
+    }
+
+    public String keys() {
+        if (head == null) {
+            return "";
+        }
+        Node<Key,Value> temp = head;
+        String x = "";
+        while (temp.getNext() != null) {
+            x = x + temp.getKey() + " ";
+            temp = temp.getNext();
+        }
+        x = x + temp.getKey() + " ";
+        return x;
+    }
+}

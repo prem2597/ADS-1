@@ -1,0 +1,107 @@
+public class SequentialSearchST<Key extends Comparable<Key>,Value> {
+    Node<Key,Value> head;
+    Node<Key,Value> presentKey;
+    Node<Key,Value> previousKey;
+    Node<Key,Value> tail;
+    
+    public void put(Key newKey, Value newValue) {
+        if ( head == null) {
+            head = new Node(newKey, newValue);
+            tail = head;
+            return;
+        }
+        if (contains(newKey)) {
+            presentKey.setValue(newValue);
+            // organize();
+            return;
+        }
+        Node<Key,Value> temp = new Node(newKey, newValue);
+        temp.setNext(head);
+        head = temp;
+    }
+
+    public Value get(Key newKey) {
+        if (contains(newKey)) {
+            organize();
+            return presentKey.getValue();
+        }
+        return null;
+    }
+    public String keys() {
+        if (head == null) {
+            return "";
+        }
+        Node<Key,Value> temp = head;
+        String answer = "";
+        while (temp.getNext() != null) {
+            answer += temp.getKey() + " ";
+            temp = temp.getNext();
+        }
+        answer += temp.getKey() + " ";
+        return answer;
+    }
+
+    public void organize() {
+        if (presentKey != previousKey) {
+            previousKey.setNext(presentKey.getNext());
+            presentKey.setNext(null);
+            tail.setNext(presentKey);
+            tail = presentKey;
+        }
+    }
+
+    public boolean contains(Key newKey) {
+        Node<Key,Value> temp = head;
+        if (isEmpty()) {
+            return false;
+        }
+        while (temp.getNext() != null) {
+            if (newKey.compareTo(temp.getKey()) == 0) {
+                presentKey = temp;
+                return true;
+            }
+            previousKey = temp;
+            temp = temp.getNext();
+        }
+        return false;
+    }
+
+    public boolean isEmpty() {
+        return head == null;
+    }
+}
+
+class Node<Key,Value> {
+    Key key;
+    Value value;
+    Node next;
+
+    public Key getKey() {
+        return this.key;
+    }
+    public void setKey(Key key) {
+        this.key = key;
+    }
+
+
+    public Value getValue() {
+        return this.value;
+    }
+    public void setValue(Value value) {
+        this.value = value;
+    }
+
+
+    public Node getNext() {
+        return this.next;
+    }
+    public void setNext(Node next) {
+        this.next = next;
+    }
+
+
+    Node(Key newKey, Value newValue) {
+        key = newKey;
+        value = newValue;
+    }
+}

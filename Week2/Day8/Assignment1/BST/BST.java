@@ -26,75 +26,89 @@ public class BST<Key extends Comparable<Key>, Value> {
     }
 
     private Value get(Node x, Key key) {
-        if (key == null) throw new IllegalArgumentException("calls get() with a null key");
-        if (x == null) return null;
+        if (x == null) {
+            return null;
+        }
         int cmp = key.compareTo(x.key);
-        if      (cmp < 0) return get(x.left, key);
-        else if (cmp > 0) return get(x.right, key);
-        else              return x.val;
+        if (cmp < 0) {
+            return get(x.left, key);
+        } else if (cmp > 0) {
+            return get(x.right, key);
+        } else {
+            return x.val;
+        }
     }
 
     public void put(Key key, Value val) {
-        if (key == null) throw new IllegalArgumentException("calls put() with a null key");
         if (val == null) {
             delete(key);
             return;
         }
         root = put(root, key, val);
-        assert check();
     }
 
     private Node put(Node x, Key key, Value val) {
-        if (x == null) return new Node(key, val, 1);
+        if (x == null) {
+            return new Node(key, val, 1);
+        }
         int cmp = key.compareTo(x.key);
-        if      (cmp < 0) x.left  = put(x.left,  key, val);
-        else if (cmp > 0) x.right = put(x.right, key, val);
-        else              x.val   = val;
+        if (cmp < 0) {
+            x.left  = put(x.left,  key, val);
+        } else if (cmp > 0) {
+            x.right = put(x.right, key, val);
+        } else {
+            x.val   = val;
+        }
         x.size = 1 + size(x.left) + size(x.right);
         return x;
     }
 
     public void deleteMin() {
-        if (isEmpty()) throw new NoSuchElementException("Symbol table underflow");
         root = deleteMin(root);
-        assert check();
     }
 
     private Node deleteMin(Node x) {
-        if (x.left == null) return x.right;
+        if (x.left == null) {
+            return x.right;
+        }
         x.left = deleteMin(x.left);
         x.size = size(x.left) + size(x.right) + 1;
         return x;
     }
 
     public void deleteMax() {
-        if (isEmpty()) throw new NoSuchElementException("Symbol table underflow");
         root = deleteMax(root);
-        assert check();
     }
 
     private Node deleteMax(Node x) {
-        if (x.right == null) return x.left;
+        if (x.right == null) {
+            return x.left;
+        }
         x.right = deleteMax(x.right);
         x.size = size(x.left) + size(x.right) + 1;
         return x;
     }
 
     public void delete(Key key) {
-        if (key == null) throw new IllegalArgumentException("calls delete() with a null key");
         root = delete(root, key);
-        assert check();
     }
 
     private Node delete(Node x, Key key) {
-        if (x == null) return null;
-
+        if (x == null) {
+            return null;
+        }
         int cmp = key.compareTo(x.key);
-        if      (cmp < 0) x.left  = delete(x.left,  key);
-        else if (cmp > 0) x.right = delete(x.right, key);
-        else { 
-            if (x.right == null) return x.left;
-            if (x.left  == null) return x.right;
+        if (cmp < 0) {
+            x.left  = delete(x.left,  key);
+        } else if (cmp > 0) {
+            x.right = delete(x.right, key);
+        } else { 
+            if (x.right == null) {
+                return x.left;
+            }
+            if (x.left  == null) {
+                return x.right;
+            }
             Node t = x;
             x = min(t.right);
             x.right = deleteMin(t.right);
@@ -105,41 +119,55 @@ public class BST<Key extends Comparable<Key>, Value> {
     }
     
     public Key min() {
-        if (isEmpty()) throw new NoSuchElementException("calls min() with empty symbol table");
         return min(root).key;
     } 
 
     private Node min(Node x) { 
-        if (x.left == null) return x; 
-        else                return min(x.left); 
+        if (x.left == null) {
+            return x;
+        } else {
+            return min(x.left);
+        }
     } 
 
     public Key max() {
-        if (isEmpty()) throw new NoSuchElementException("calls max() with empty symbol table");
         return max(root).key;
     } 
 
     private Node max(Node x) {
-        if (x.right == null) return x; 
-        else                 return max(x.right); 
+        if (x.right == null) {
+            return x;
+        } else {
+            return max(x.right);
+        }
     } 
 
     public Key floor(Key key) {
-        if (key == null) throw new IllegalArgumentException("argument to floor() is null");
-        if (isEmpty()) throw new NoSuchElementException("calls floor() with empty symbol table");
         Node x = floor(root, key);
-        if (x == null) return null;
-        else return x.key;
+        if (x == null) {
+            return null;
+        } else {
+            return x.key;
+        }
     } 
 
     private Node floor(Node x, Key key) {
-        if (x == null) return null;
+        if (x == null) {
+            return null;
+        }
         int cmp = key.compareTo(x.key);
-        if (cmp == 0) return x;
-        if (cmp <  0) return floor(x.left, key);
+        if (cmp == 0) {
+            return x;
+        }
+        if (cmp <  0) {
+            return floor(x.left, key);
+        }
         Node t = floor(x.right, key); 
-        if (t != null) return t;
-        else return x; 
+        if (t != null) {
+            return t;
+        } else {
+            return x;
+        }
     } 
 
     public Key floor2(Key key) {
@@ -147,29 +175,43 @@ public class BST<Key extends Comparable<Key>, Value> {
     }
 
     private Key floor2(Node x, Key key, Key best) {
-        if (x == null) return best;
+        if (x == null) {
+            return best;
+        }
         int cmp = key.compareTo(x.key);
-        if      (cmp  < 0) return floor2(x.left, key, best);
-        else if (cmp  > 0) return floor2(x.right, key, x.key);
-        else               return x.key;
+        if (cmp  < 0) {
+            return floor2(x.left, key, best);
+        } else if (cmp  > 0) {
+            return floor2(x.right, key, x.key);
+        } else {
+            return x.key;
+        }
     } 
 
     public Key ceiling(Key key) {
-        if (key == null) throw new IllegalArgumentException("argument to ceiling() is null");
-        if (isEmpty()) throw new NoSuchElementException("calls ceiling() with empty symbol table");
         Node x = ceiling(root, key);
-        if (x == null) return null;
-        else return x.key;
+        if (x == null) {
+            return null;
+        } else {
+            return x.key;
+        }
     }
 
     private Node ceiling(Node x, Key key) {
-        if (x == null) return null;
+        if (x == null) {
+            return null;
+        }
         int cmp = key.compareTo(x.key);
-        if (cmp == 0) return x;
+        if (cmp == 0) {
+            return x;
+        }
         if (cmp < 0) { 
             Node t = ceiling(x.left, key); 
-            if (t != null) return t;
-            else return x; 
+            if (t != null) {
+                return t;
+            } else {
+                return x;
+            }
         } 
         return ceiling(x.right, key); 
     }
