@@ -58,7 +58,7 @@ public class Queue<Item> implements Iterable<Item> {
     }
 
     public Iterator<Item> iterator()  {
-        return new ListIterator(first);
+        return new ListIterator(first);  
     }
 
     private class ListIterator implements Iterator<Item> {

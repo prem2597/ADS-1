@@ -10,14 +10,14 @@ import java.util.List;
  */
 public class BinarySearchST<Key extends Comparable<Key>, Value> {
 //    private static final int capacity = 2;
-   private Key[] keeys;
+   private Key[] keys;
    private Value[] vals;
    private int n = 0;
    private int size;
    int capacity = 5;
    
    public BinarySearchST() {
-       keeys = (Key[]) new Comparable[capacity];
+       keys = (Key[]) new Comparable[capacity];
        vals = (Value[]) new Object[capacity];
        size = 0;
    }
@@ -26,11 +26,11 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
        Key[] x = (Key[]) new Comparable[capacity];
        Value[] y = (Value[]) new Object[capacity];
        for (int i = 0; i < n; i++) {
-           x[i] = keeys[i];
+           x[i] = keys[i];
            y[i] = vals[i];
        }
        vals = y;
-       keeys = x;
+       keys = x;
    }
 
    public int size() {
@@ -42,26 +42,35 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
    }
 
    public boolean contains(Key key) {
-       return get(key) != null;
+       if (key == null) {
+           throw new IllegalArgumentException("argument to contains() is null");
+        }
+        return get(key) != null;
    }
 
    public Value get(Key key) {
+       if (key == null) {
+           throw new IllegalArgumentException("argument to get() is null");
+       }
        if(isEmpty()) {
            return null;
        }
        int i = rank(key);
-       if(i < n && keeys[i].compareTo(key) == 0) {
+       if(i < n && keys[i].compareTo(key) == 0) {
            return vals[i];
        }
        return null;
    }
 
    public int rank(Key key) {
+       if (key == null) {
+           throw new IllegalArgumentException("argument to rank() is null");
+       }
        int lo = 0;
        int hi = n-1;
        while (lo <= hi) {
            int mid = lo + (hi - lo) / 2;
-           int cmp = key.compareTo(keeys[mid]);
+           int cmp = key.compareTo(keys[mid]);
            if (cmp < 0) {
                hi = mid - 1;
            } else if (cmp > 0) {
@@ -74,80 +83,92 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
    }
 
    public void put(Key key, Value val) {
+       if (key == null) {
+           throw new IllegalArgumentException("first argument to put() is null");
+       }
        if(val == null) {
            delete(key);
            return;
        }
        int i = rank(key);
 
-       if(i < n && keeys[i].compareTo(key) == 0) {
+       if(i < n && keys[i].compareTo(key) == 0) {
            vals[i] = val;
            return;
        }
 
-       if (n == keeys.length) {
-           resize(2 * keeys.length);
+       if (n == keys.length) {
+           resize(2 * keys.length);
        }
 
        for (int j = n; j > i; j--) {
-           keeys[j] = keeys[j - 1];
+           keys[j] = keys[j - 1];
            vals[j] = vals[j - 1];
        }
 
-       keeys[i] = key;
+       keys[i] = key;
        vals[i] = val;
        n++;
    }
 
    public void delete(Key key) {
+       if (key == null) {
+           throw new IllegalArgumentException("argument to delete() is null");
+       }
        if (isEmpty()) {
            return;
        }
        int i = rank(key);
-       if (i == n || keeys[i].compareTo(key) != 0) {
+       if (i == n || keys[i].compareTo(key) != 0) {
            return;
        }
        for (int j = i; j < n - 1; j++) {
-           keeys[j] = keeys[j + 1];
+           keys[j] = keys[j + 1];
            vals[j] = vals[j+1];
        }
        n--;
-       keeys[n] = null;
+       keys[n] = null;
        vals[n] = null;
-       if (n > 0 && n == keeys.length/4) {
-           resize(keeys.length/2);
+       if (n > 0 && n == keys.length/4) {
+           resize(keys.length/2);
        }
    }
 
    public void deleteMin() {
+       if (isEmpty()) {
+           throw new NoSuchElementException("Symbol table underflow error");
+       }
        delete(min());
    }
 
    public void deletemax() {
+       if (isEmpty()) {
+           throw new NoSuchElementException("Symbol table underflow error");
+       }
        delete(max());
    }
 
    public Key min() {
-       return keeys[0];
+       return keys[0];
    }
 
    public Key max() {
-       return keeys[n - 1];
+       return keys[n - 1];
    }
 
    public Key select(int k) {
-       return keeys[k];
+       return keys[k];
    }
 
    public Key floor(Key key) {
        int i = rank(key);
-       if(i < n && key.compareTo(keeys[i]) == 0) {
-           return keeys[i];
+       if(i < n && key.compareTo(keys[i]) == 0) {
+           return keys[i];
        }
        if (i == 0) {
            return null;
        } else {
-           return keeys[i - 1];
+           return keys[i - 1];
        }
    }
 
@@ -156,7 +177,7 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
        if (i == n) {
            return null;
        } else {
-           return keeys[i];
+           return keys[i];
        }
    }
 
@@ -171,20 +192,20 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
         }
     }
 
-    public Iterable<Key> keeys() {
-        return keeys(min(), max());
+    public Iterable<Key> keys() {
+        return keys(min(), max());
     }
 
-    public Iterable<Key> keeys(Key lo, Key hi) {
+    public Iterable<Key> keys(Key lo, Key hi) {
         Queue<Key> queue = new Queue<Key>(); 
         if (lo.compareTo(hi) > 0) {
             return queue;
         }
         for (int i = rank(lo); i < rank(hi); i++) {
-            queue.enqueue(keeys[i]);
+            queue.enqueue(keys[i]);
         }   
         if (contains(hi)) {
-            queue.enqueue(keeys[rank(hi)]);
+            queue.enqueue(keys[rank(hi)]);
         }
         return queue; 
     }
@@ -195,7 +216,7 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
 
     private boolean isSorted() {
         for (int i = 1; i < size(); i++) {
-            if (keeys[i].compareTo(keeys[i-1]) < 0) {
+            if (keys[i].compareTo(keys[i-1]) < 0) {
                 return false;
             } else {
                 return true;
@@ -211,7 +232,7 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
             }
         }
         for (int i = 0; i < size(); i++) {
-            if (keeys[i].compareTo(select(rank(keeys[i]))) != 0) {
+            if (keys[i].compareTo(select(rank(keys[i]))) != 0) {
                 return false;
             } else {
                 return true;
@@ -223,7 +244,7 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
     // public String keys() {
     //     String data = "";
     //     for (int i = 0; i < n; i++) {
-    //         data += keeys[i] + " ";
+    //         data += keys[i] + " ";
     //     }
     //     return data;
     // }

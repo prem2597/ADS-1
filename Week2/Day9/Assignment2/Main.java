@@ -1,15 +1,14 @@
 import java.util.Scanner;
 class Main {
     public static void main(String[] args) { 
-        LinearProbingHashST<String, Integer> st = new LinearProbingHashST<String, Integer>();
-        Scanner in = new Scanner(System.in);
-        String str = in.nextLine();
-        for (int i = 0; !str.isEmpty(); i++) {
-            String key = str.readString();
-            str.put(key, i);
-        }
-        for (String s : st.keys()) {
-            System.out.println(s + " " + st.get(s));
-        }
+        LinearProbingHashST<String, Integer> str = new LinearProbingHashST<String, Integer>();
+        // Scanner in = new Scanner(System.in);
+        // String str = in.nextLine();
+        str.put("Prem", 42);
+        str.put("P", 5);
+        System.out.println("Before update p value :" +  str.get("P"));
+        str.put("P", 542);
+        System.out.println("After update p value :" + str.get("P"));
+        System.out.println(str.get("Prem"));
     }
 }

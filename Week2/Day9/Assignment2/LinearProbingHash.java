@@ -1,7 +1,7 @@
 import java.util.*;
 
 class LinearProbingHashST<Key, Value> {
-    private static final int size1 = 4;
+    private static final int size1 = 10000;
     private int n;
     private int m;
     private Key[] keys;
@@ -12,8 +12,8 @@ class LinearProbingHashST<Key, Value> {
     }
 
     public LinearProbingHashST(int size1) {
-        m = size1;
-        n = 0;
+        m = this.size1;
+        n = 10000;
         keys = (Key[]) new Object[m];
         vals = (Value[]) new Object[n];
     }
@@ -111,4 +111,5 @@ class LinearProbingHashST<Key, Value> {
         }
         return queue;
     }
+    
 }
