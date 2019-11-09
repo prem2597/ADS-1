@@ -28,7 +28,8 @@ public class BinarySTA<Key extends Comparable<Key>, Value> {
 			int nextElementIndex = size();
 			keys[nextElementIndex] = key;
 			values[nextElementIndex] = value;
-			size[nextElementIndex] = 1;
+            size[nextElementIndex] = 1;
+            
 			return nextElementIndex;
 		}    
 
@@ -46,6 +47,6 @@ public class BinarySTA<Key extends Comparable<Key>, Value> {
 		return index;
     }
     
-    
+
 
 }
