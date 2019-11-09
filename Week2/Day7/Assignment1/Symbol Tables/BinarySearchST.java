@@ -171,23 +171,23 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
         }
     }
 
-    // public Iterable<Key> keeys() {
-    //     return keeys(min(), max());
-    // }
+    public Iterable<Key> keeys() {
+        return keeys(min(), max());
+    }
 
-    // public Iterable<Key> keeys(Key lo, Key hi) {
-    //     Queue<Key> queue = new Queue<Key>(); 
-    //     if (lo.compareTo(hi) > 0) {
-    //         return queue;
-    //     }
-    //     for (int i = rank(lo); i < rank(hi); i++) {
-    //         queue.enqueue(keeys[i]);
-    //     }   
-    //     if (contains(hi)) {
-    //         queue.enqueue(keeys[rank(hi)]);
-    //     }
-    //     return queue; 
-    // }
+    public Iterable<Key> keeys(Key lo, Key hi) {
+        Queue<Key> queue = new Queue<Key>(); 
+        if (lo.compareTo(hi) > 0) {
+            return queue;
+        }
+        for (int i = rank(lo); i < rank(hi); i++) {
+            queue.enqueue(keeys[i]);
+        }   
+        if (contains(hi)) {
+            queue.enqueue(keeys[rank(hi)]);
+        }
+        return queue; 
+    }
 
     private boolean check() {
         return isSorted() && rankCheck();
@@ -220,11 +220,11 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
         return true;
     }
 
-    public String keys() {
-        String data = "";
-        for (int i = 0; i < n; i++) {
-            data += keeys[i] + " ";
-        }
-        return data;
-    }
+    // public String keys() {
+    //     String data = "";
+    //     for (int i = 0; i < n; i++) {
+    //         data += keeys[i] + " ";
+    //     }
+    //     return data;
+    // }
 }
