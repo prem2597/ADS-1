@@ -111,5 +111,13 @@ class LinearProbingHashST<Key, Value> {
         }
         return queue;
     }
+
+    public void display() {
+        for (int i = 0; i < keys.length; i++) {
+            if (keys[i] != null) {
+                System.out.println("(" + i + "-" + keys[i] + "," + vals[i] + ")");
+            }
+        }
+    }
     
 }
