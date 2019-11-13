@@ -1,0 +1,94 @@
+import java.util.Iterator;
+import java.lang.*;
+import java.util.NoSuchElementException;
+/**
+ * Implements the Deque.
+ * @author PREM
+ * @param <Item> Generic type.
+ */
+class Deque<Item> implements Iterable<Item> {
+    /**
+     * Size of the array.
+     */
+    int size;
+    /**
+     * array initialization.
+     */
+    Item[] arr;
+    /**
+     * front of the queue.
+     */
+    int front;
+    /**
+     * rear of the queue.
+     */
+    int rear;
+    /**
+     * construts an empty deque.
+     */
+    public Deque() {
+        /**
+         * taking array of size;
+         */
+        int arr[] = new int[size];
+        front = -1;
+        rear = -1;
+    }
+    /**
+     * checks whether the queue is empty or not.
+     * @return boolean true or false.
+     */
+    public boolean isEmpty() {
+        if (front == -1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public boolean full() {
+        if ((front == 0 && rear = size - 1) || (front == rear + 1)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public int size() {
+        
+    }
+    /**
+     * add item to the front.
+     * @param item element
+     */
+    public void addFirst(Item item) {
+        if (full()) {
+            System.out.println("Over Flow");
+        } else {
+            if (front == -1) {
+                front = 0;
+                rear = 0;
+            } else if (front == 0) {
+                front = size - 1;
+            } else {
+                front = front - 1;
+            }
+            arr[front] = item;
+        }
+    }
+    public void addLast(Item item) {
+        if (full()) {
+            System.out.println("Over Flow");
+        } else {
+            if (front == -1) {
+                front = 0;
+                rear = 0;
+            } else if (rear == size - 1) {
+                rear = 0;
+            } else {
+                rear = rear + 1;
+            }
+            arr[rear] = item;
+        }
+    }
+
+}
+
