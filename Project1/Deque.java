@@ -165,6 +165,20 @@ public class Deque<Item> implements Iterable<Item> {
         return new ListIterator();
     }
     public static void main(String[] args) {
-    
+        Deque<Integer> q = new Deque<Integer>();
+        for (int i = 0; i < 4; i++) {
+            q.addFirst(i);
+            q.removeFirst();
+        }
+        // q.removeFirst();
+        for (int j = 10; j < 14; j++) {
+            q.addLast(j);
+            // q.size();
+            q.removeLast();
+            // q.size();
+            // q.isEmpty();
+        }
+
     }
 }
+
