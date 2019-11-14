@@ -1,5 +1,7 @@
 import java.util.Iterator;
-// import edu.princeton.cs.algs4.*;
+import edu.princeton.cs.algs4.StdRandom;
+// import java.lang;
+// import java.lang.*;
 import java.util.NoSuchElementException;
 /**
  * Implements a randomized queue that is except the.
@@ -10,7 +12,7 @@ import java.util.NoSuchElementException;
 public class RandomizedQueue<Item> implements Iterable<Item> {
     private class RandomIterator implements Iterator<Item> {
         private int i = size;
-        private Item[] randomItems;
+        private final Item[] randomItems;
         public RandomIterator() {
             randomItems = (Item[]) new Object[size];
             System.arraycopy(items, 0, randomItems, 0, size);
@@ -41,7 +43,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     public int size() {
         return size;
     }
-    public void resize(int capacity) {
+    private void resize(int capacity) {
         Item[] x = (Item[]) new Object[capacity];
         for (int i = 0; i < size; i++) {
             x[i] = items[i];

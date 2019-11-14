@@ -1,5 +1,8 @@
-// import edu.princeton.cs.algs4.*;
+import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.StdOut;
+// import java.lang;
 import java.util.NoSuchElementException;
+// import java.lang.*;
 /**
  * permuatation using deck and Randomized queue.
  * @author PREM
