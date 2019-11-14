@@ -1,6 +1,6 @@
-import java.util.Arrays;
+// import java.util.Arrays;
 import java.util.Scanner;
-import java.util.Random;
+// import java.util.Random;
 /**
  * @author PREM
  */
@@ -17,7 +17,6 @@ public final class FarthestPair {
      */
     public static void main(final String[] args) {
         Scanner scan = new Scanner(System.in);
-        
         System.out.println("Enter the size of the array");
         int n = scan.nextInt();
         // Random rand = new Random(n);
