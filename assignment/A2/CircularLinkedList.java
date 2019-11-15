@@ -79,7 +79,7 @@ public class CircularLinkedList<Item> {
         rear = new Node();
         rear.value = item;
         // if (q.rear == null) {
-        //     q.rear= nd;
+        //     q.rear=nd;
         // } else {
         //     q.rear.link = nd;
         // }
