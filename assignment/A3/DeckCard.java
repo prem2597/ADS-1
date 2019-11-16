@@ -47,9 +47,9 @@ class DeckCard {
                 suit2 = 4;
             }
             if (suit1 > suit2) {
-                return -1;
-            } else if (suit1 < suit2) {
                 return 1;
+            } else if (suit1 < suit2) {
+                return -1;
             } else {
                 int face1 = 0;
                 int face2 = 0;
@@ -59,7 +59,7 @@ class DeckCard {
                     face1 = 11;
                 } else if (this.face.equals("Q")) {
                     face1 = 12;
-                } else {
+                } else if(this.face.equals("K")){
                     face1 = 13;
                 }
                 if (obj1.face.equals("A")) {
@@ -68,7 +68,7 @@ class DeckCard {
                     face2 = 11;
                 } else if (obj1.face.equals("Q")) {
                     face2 = 12;
-                } else {
+                } else if (obj1.face.equals("K")){
                     face2 = 13;
                 }
                 if (face1 == 0) {
@@ -94,12 +94,10 @@ class DeckCard {
 		int n = cards.length;
 		for (int i = 1; i < n; i++) {
 			for (int j = i; j > 0; j--) {
-				if (cards[j - 1].compareTo(cards[j]) == -1) {
+				if (cards[j - 1].compareTo(cards[j]) == 1) {
 					Card temp = cards[j - 1];
 					cards[j - 1] = cards[j];
 					cards[j] = temp;
-				} else {
-					break;
 				}
 			}
 		}
@@ -107,8 +105,11 @@ class DeckCard {
 	}
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        Card[] cards = new Card[5];
+        System.out.println("Enter the number of cards");
+        int n = Integer.parseInt(sc.nextLine());
+        Card[] cards = new Card[n];
         int size = 0;
+        System.out.println("Enter the card details seperated with spaces");
         String cardData = sc.nextLine();
         String[] arr = cardData.split(" ");
         for (String a : arr) {
