@@ -1,38 +1,22 @@
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-
+import java.util.Scanner;
 /**
- *  The {@code MinPQ} class represents a priority queue of generic keys.
- *  It supports the usual <em>insert</em> and <em>delete-the-minimum</em>
- *  operations, along with methods for peeking at the minimum key,
- *  testing if the priority queue is empty, and iterating through
- *  the keys.
- *  <p>
- *  This implementation uses a <em>binary heap</em>.
- *  The <em>insert</em> and <em>delete-the-minimum</em> operations take
- *  &Theta;(log <em>n</em>) amortized time, where <em>n</em> is the number
- *  of elements in the priority queue. This is an amortized bound
- *  (and not a worst-case bound) because of array resizing operations.
- *  The <em>min</em>, <em>size</em>, and <em>is-empty</em> operations take
- *  &Theta;(1) time in the worst case.
- *  Construction takes time proportional to the specified capacity or the
- *  number of items used to initialize the data structure.
- *  <p>
- *  For additional documentation, see
- *  <a href="https://algs4.cs.princeton.edu/24pq">Section 2.4</a> of
- *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
- *
- *  @author Robert Sedgewick
- *  @author Kevin Wayne
- *
- *  @param <Key> the generic type of key on this priority queue
+ * This MinPQwill implement a minheap in which the top node will.
+ * contain all the minimum elements.
+ * @param <Key> generic Key type to eliminate the values.
+ * @author PREM
+ * reference : Bob Sedgewick.
+ * Time Complexity :
  */
 public class MinPQ<Key> implements Iterable<Key> {
-    private Key[] pq;                    // store items at indices 1 to n
-    private int n;                       // number of items on priority queue
-    private Comparator<Key> comparator;  // optional comparator
-
+    // store items at indices 1 to n
+    private Key[] pq;
+    // number of items on priority queue
+    private int n;
+    // comparator
+    private Comparator<Key> comparator;
     /**
      * Initializes an empty priority queue with the given initial capacity.
      *
@@ -42,7 +26,6 @@ public class MinPQ<Key> implements Iterable<Key> {
         pq = (Key[]) new Object[initCapacity + 1];
         n = 0;
     }
-
     /**
      * Initializes an empty priority queue.
      */
@@ -264,13 +247,36 @@ public class MinPQ<Key> implements Iterable<Key> {
      * @param args the command-line arguments
      */
     public static void main(String[] args) {
-        MinPQ<String> pq = new MinPQ<String>();
-        while (!StdIn.isEmpty()) {
-            String item = StdIn.readString();
-            if (!item.equals("-")) pq.insert(item);
-            else if (!pq.isEmpty()) StdOut.print(pq.delMin() + " ");
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the number of elements in the heap");
+        int n = Integer.parseInt(sc.nextLine());
+        MinPQ<Integer> pq = new MinPQ<Integer>(n);
+        // while (!StdIn.isEmpty()) {
+        //     String item = StdIn.readString();
+        //     if (!item.equals("-")) pq.insert(item);
+        //     else if (!pq.isEmpty()) StdOut.print(pq.delMin() + " ");
+        // }
+        System.out.println("Enter the elements into Heap");
+        for (int i = 0; i < n; i++) {
+            pq.insert(Integer.parseInt(sc.nextLine()));
         }
-        StdOut.println("(" + pq.size() + " left on pq)");
+        // pq.iterator();
+        System.out.println("Elements in the Heap : ");
+        for (int s : pq) {
+            System.out.println(s);
+        }
+        System.out.println("Enter the kth number of largest elements you require : ");
+        int k = Integer.parseInt(sc.nextLine());
+        if (k <= n) {
+            for (int j = 1; j <= (n - k); j++) {
+                pq.delMin();
+            }
+        } else {
+            System.out.println("Enter the correct value.");
+        }
+        for (int s : pq) {
+            System.out.println(s);
+        }
     }
 
 }
