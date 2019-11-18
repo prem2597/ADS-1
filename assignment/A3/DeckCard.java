@@ -1,9 +1,28 @@
 import java.util.*;
 import java.util.Scanner;
-class DeckCard {
+/**
+ * DeckClass are to used to sort the deck.
+ * @author PREM
+ * Time complexity :
+ * Best Case : N.
+ * average case : 1/4 N^2.
+ * worst case : 1/2 N^2.
+ * references : Geeks for Geeks,Stack overflow,Bob sedgweick.
+ */
+public final class DeckCard {
+    /**
+     * Card class represents the comparable class of type card.
+     * this card class contains the suit and the face.
+     */
     public static class Card implements Comparable<Card> {
-        String suit;
-        String face;
+        /**
+         * suit represents the suit of the card.
+         */
+        private String suit;
+        /**
+         * face card represents the face of the card.
+         */
+        private String face;
         // String[] arr;
         // public static String[] removeLastCharacter(String str1) {
         //     String[] result = new String[2];
@@ -15,11 +34,21 @@ class DeckCard {
         //     }
         //     return result;
         // }
-        Card (String faceCard, String suitCard) {
+        /**
+         * card is the constructor class.
+         * @param faceCard represents the face card
+         * @param suitCard represents the suit card
+         */
+        Card(final String faceCard, final String suitCard) {
             this.face = faceCard;
             this.suit = suitCard;
         }
-        public int compareTo(Card obj1) {
+        /**
+         * compareTo will compare two cards based on the parameters.
+         * @param obj1 represents the card object to be compared.
+         * @return integer value -1 or 0 or 1.
+         */
+        public int compareTo(final Card obj1) {
             int suit1 = 0;
             int suit2 = 0;
             // int s = 1;
@@ -59,7 +88,7 @@ class DeckCard {
                     face1 = 11;
                 } else if (this.face.equals("Q")) {
                     face1 = 12;
-                } else if(this.face.equals("K")){
+                } else if (this.face.equals("K")) {
                     face1 = 13;
                 }
                 if (obj1.face.equals("A")) {
@@ -68,7 +97,7 @@ class DeckCard {
                     face2 = 11;
                 } else if (obj1.face.equals("Q")) {
                     face2 = 12;
-                } else if (obj1.face.equals("K")){
+                } else if (obj1.face.equals("K")) {
                     face2 = 13;
                 }
                 if (face1 == 0) {
@@ -86,24 +115,42 @@ class DeckCard {
             }
             return 0;
         }
+        /**
+         * toString print in the form of a string.
+         * @return String type.
+         */
         public String toString() {
-            return suit+" "+face;
+            return suit + " " + face;
         }
     }
+    /**
+     * constructor for checkstyle.
+     */
+    private DeckCard() {
+    }
+    /**
+     * applying insertion sort.
+     * @param cards card array.
+     * @return sorted card array.
+     */
     public static Card[] sort(final Card[] cards) {
-		int n = cards.length;
-		for (int i = 1; i < n; i++) {
-			for (int j = i; j > 0; j--) {
-				if (cards[j - 1].compareTo(cards[j]) == 1) {
-					Card temp = cards[j - 1];
-					cards[j - 1] = cards[j];
-					cards[j] = temp;
-				}
-			}
-		}
-		return cards;
-	}
-    public static void main(String[] args) {
+        int n = cards.length;
+        for (int i = 1; i < n; i++) {
+            for (int j = i; j > 0; j--) {
+                if (cards[j - 1].compareTo(cards[j]) == 1) {
+                    Card temp = cards[j - 1];
+                    cards[j - 1] = cards[j];
+                    cards[j] = temp;
+                }
+            }
+        }
+        return cards;
+    }
+    /**
+     * main method to read and print the data.
+     * @param args arguments.
+     */
+    public static void main(final String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the number of cards");
         int n = Integer.parseInt(sc.nextLine());
@@ -134,6 +181,6 @@ class DeckCard {
         // for (String a : face) {
         //     System.out.println(a);
         // }
-
+        sc.close();
     }
 }

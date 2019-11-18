@@ -4,16 +4,16 @@ import java.util.Scanner;
 // import java.lang.IndexOutOfBoundsException;
 /**
  * @author PREM
+ * reference : Geek for Geeks, Stack overFlow, Bob Sedgweick.
  */
 public final class FarthestPair {
     /**
      * default constructor.
      */
     private FarthestPair() {
-
     }
     /**
-     * fathest methods tells the min value and the max value
+     * fathest methods tells the min value and the max value.
      * @param arr array
      * @param min minimum value
      * @param max maximum value
