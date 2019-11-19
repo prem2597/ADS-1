@@ -6,7 +6,7 @@ public class Solution {
      * @author PREM
      * @param args the command-line arguments
      * refernce Bob Sedgewick.
-     * Time :
+     * Time : Insertion Nlogn, deletion : klogn.
      */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);

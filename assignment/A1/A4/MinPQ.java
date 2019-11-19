@@ -8,7 +8,7 @@ import java.util.Scanner;
  * @param <Key> generic Key type to eliminate the values.
  * @author PREM
  * reference : Bob Sedgewick.
- * Time Complexity :
+ * Time Complexity : Insertion Nlogn, deletion : klogn.
  */
 public class MinPQ<Key> implements Iterable<Key> {
     // store items at indices 1 to n

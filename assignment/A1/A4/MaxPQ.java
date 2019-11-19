@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
  * @param <Key> generic Key type to eliminate the values.
  * @author PREM
  * reference : Bob Sedgewick.
- * Time Complexity :
+ * Time Complexity : Insertion Nlogn, deletion : klogn.
  */
 public class MaxPQ<Key> implements Iterable<Key> {
     private Key[] pq;                    // store items at indices 1 to n
