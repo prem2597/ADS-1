@@ -8,6 +8,7 @@ import java.util.NoSuchElementException;
  * removed is chosen uniformly at random.
  * @param <Item> generic type
  * @author PREM
+ * reference Bob Sedgewick, Stack overFlow, Geek for Geeks, coursera.
  */
 public class RandomizedQueue<Item> implements Iterable<Item> {
     private class RandomIterator implements Iterator<Item> {

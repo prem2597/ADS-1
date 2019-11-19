@@ -7,6 +7,7 @@ import java.util.NoSuchElementException;
  * Implements the Deque.
  * @author PREM
  * @param <Item> Generic type.
+ * reference Bob Sedgewick, Stack overFlow, Geek for Geeks, coursera.
  */
 public class Deque<Item> implements Iterable<Item> {
     private class ListIterator<Item> implements Iterator<Item> {

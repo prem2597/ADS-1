@@ -6,6 +6,7 @@ import java.util.NoSuchElementException;
 /**
  * permuatation using deck and Randomized queue.
  * @author PREM
+ * reference Bob Sedgewick, Stack overFlow, Geek for Geeks, coursera.
  */
 public class Permutation {
     public static void main(String[] args) {
