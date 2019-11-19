@@ -70,7 +70,7 @@ public class BinarySearchST<Key extends Comparable, Value> {
             return;
         }
         int m = n;
-        if (keys[m - 1].compareTo(key) > 0) {
+        if (n != 0 && keys[m - 1].compareTo(key) < 0) {
             keys[n] = key;
             vals[n++] = val;
             return;

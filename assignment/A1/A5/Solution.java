@@ -30,7 +30,7 @@ class Solution {
         x.put("K",10);
         x.put("L",11);
         x.put("M",12);
-        x.put("Z",0);
+        x.put("Z",10000);
         x.put("Y",1);
         x.put("X",2);
         x.put("W",3);
@@ -44,6 +44,6 @@ class Solution {
         x.put("O",11);
         x.put("N",12);
         System.out.println(x.get("M"));
-        System.out.println(x.get("Z"));
+        System.out.println(x.get("Y"));
     }
 }
