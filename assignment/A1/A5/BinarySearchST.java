@@ -1,4 +1,11 @@
 import java.util.*;
+/**
+ * BinarySearch Symbol Table.
+ * @param <Key> key type
+ * @param <Value> value type.
+ * @author PREM
+ * reference Bob Sedgweick.
+ */
 public class BinarySearchST<Key extends Comparable, Value> {
     private Key[] keys;
     private Value[] vals;
